@@ -289,7 +289,7 @@ void AGeneratorV1::setRoomsID()
 			}
 		}
 	}	
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("4.Room ID's fetes")));
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("4.Room ID's fetes~~~~")));
 }
 
 void AGeneratorV1::setSpecialRooms() {
@@ -314,8 +314,8 @@ void AGeneratorV1::setSpecialRooms() {
 		salaOk = false;
 
 		if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] == 0) {	//Si no te ID ni direcció
-			//Esquerra
-			if (x > 0 && _mapaLogic[x - 1][y] != 0 && !salaOk) {
+			//Esquerra 
+			if (x > 0 && _mapaLogic[x - 1][y] != 0 && !salaOk && _infoCasella[x-1][y].id > 2) {	//Comprovem els limits de la X i que la id no sigui cap de les 3 especials
 
 				//Mirem que només esigui conectada amb una sala
 				_mapaLogic[x - 1][y] += 4;		//Li sumem 4 = porta cap a la dreta
@@ -325,7 +325,7 @@ void AGeneratorV1::setSpecialRooms() {
 				salaOk = true;
 			}
 			//Dreta
-			if (x < MidaMapa - 1 && _mapaLogic[x + 1][y] != 0 && !salaOk) {
+			else if (x < MidaMapa - 1 && _mapaLogic[x + 1][y] != 0 && !salaOk && _infoCasella[x + 1][y].id > 2) {
 				_mapaLogic[x + 1][y] += 8;
 				_mapaLogic[x][y] += 4;
 				_infoCasella[x][y].id = salesFetes;
@@ -333,7 +333,7 @@ void AGeneratorV1::setSpecialRooms() {
 				salaOk = true;
 			}
 			//Amunt
-			if (y > 0 && _mapaLogic[x][y - 1] != 0 && !salaOk) {
+			else if (y > 0 && _mapaLogic[x][y - 1] != 0 && !salaOk && _infoCasella[x][y-1].id > 2) {
 				_mapaLogic[x][y - 1] += 2;
 				_mapaLogic[x][y] += 1;
 				_infoCasella[x][y].id = salesFetes;
@@ -341,7 +341,7 @@ void AGeneratorV1::setSpecialRooms() {
 				salaOk = true;
 			}
 			//Avall
-			if (y < MidaMapa - 1 && _mapaLogic[x][y + 1] != 0 && !salaOk) {
+			else if (y < MidaMapa - 1 && _mapaLogic[x][y + 1] != 0 && !salaOk && _infoCasella[x][y + 1].id > 2) {
 				_mapaLogic[x][y + 1] += 1;
 				_mapaLogic[x][y] += 2;
 				_infoCasella[x][y].id = salesFetes;

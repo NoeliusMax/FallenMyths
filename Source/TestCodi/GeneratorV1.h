@@ -47,12 +47,15 @@ public:
 
 	// Spawn Rooms
 
+	//Nombre maxim de sales - dessincronitzat
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Generator Values")
 	int maxRooms;
 
+	//Nombre minim de sales - dessincronitzat
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Generator Values")
 	int minRooms;
 
+	//Mida del mapa - dessincronitzat
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Generator Values")
 	int midaMapa;
 
