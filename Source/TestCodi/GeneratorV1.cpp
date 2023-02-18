@@ -107,7 +107,7 @@ void AGeneratorV1::clearData() {
 	minRooms = 17;
 	midaMapa = MidaMapa;
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("2.Variables netes")));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("2.Variables netes")));
 }
 
 void AGeneratorV1::generateLevel()	//Generació de mapa logic i creació de mapa real
@@ -276,7 +276,7 @@ void AGeneratorV1::generateLevel()	//Generació de mapa logic i creació de mapa r
 		}
 	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("3.Mapa logic creat")));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("3.Mapa logic creat")));
 }
 
 void AGeneratorV1::setRoomsID()
@@ -289,7 +289,7 @@ void AGeneratorV1::setRoomsID()
 			}
 		}
 	}	
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("4.Room ID's fetes~~~~")));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("4.Room ID's fetes~~~~")));
 }
 
 void AGeneratorV1::setSpecialRooms() {
@@ -350,7 +350,7 @@ void AGeneratorV1::setSpecialRooms() {
 			}
 		}
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("5.ID's especials fetes")));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("5.ID's especials fetes")));
 }
 
 void AGeneratorV1::placeLevel() {
@@ -376,7 +376,7 @@ void AGeneratorV1::placeLevel() {
 			}
 			
 			if (GEngine) {
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("6.Sales Col·locades")));
+				//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("6.Sales Col·locades")));
 			}
 		}
 		else {
@@ -386,16 +386,16 @@ void AGeneratorV1::placeLevel() {
 	else {
 		
 		if (BaseRoom == NULL) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - BaseRoom")));
+			///GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - BaseRoom")));
 		}
 		else if (StartRoom == NULL) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - StartRoom")));
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - StartRoom")));
 		}
 		else if (EndRoom == NULL) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - EndRoom")));
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - EndRoom")));
 		}
 		else if (LootRoom == NULL) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - LootRoom")));
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Referencia Room NULL - LootRoom")));
 		}
 	}	
 }
@@ -522,7 +522,7 @@ int AGeneratorV1::getRoomID(int x, int y) {
 void AGeneratorV1::BeginPlay()
 {
 	Super::BeginPlay();
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("1.Dins BeginPlay")));	
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("1.Dins BeginPlay")));	
 }
 
 // Called every frame
@@ -629,5 +629,5 @@ void AGeneratorV1::debugGenerateLevel()
 	}
 
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("3.Mapa logic creat")));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("3.Mapa logic creat")));
 }
