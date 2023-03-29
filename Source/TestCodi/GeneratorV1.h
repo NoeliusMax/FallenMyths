@@ -26,15 +26,19 @@ class TESTCODI_API AGeneratorV1 : public AActor
 	std::vector<pos>_casellesFetes;
 	int _valorAleatori;				//Valor per el switch de les direccions dins de cada posibilitat manipulem les direccions manualment
 
-	UWorld* myWorld; // UWorld per col·locar les sales
 
-	bool referenciesOk;
+	std::vector<int>idSales;
+
+	bool StartRoom, LootRoom, BossRoom;
+
+	//UWorld* myWorld; // UWorld per col·locar les sales
+
 
 	infoCaselles _infoCasella[MidaMapa][MidaMapa];	//Guardem les direccions valides de cada casella i s'hi hem estat o no
 
 	virtual void comprovacioPasEnrere();
 
-	virtual void spawnRoom(int roomNum, int doorNum, FVector2D vectorPos); //Li passem X i Y, l'altura sempre serà la mateixa
+	//virtual void spawnRoom(int roomNum, int doorNum, FVector2D vectorPos); //Li passem X i Y, l'altura sempre serà la mateixa
 
 protected:
 	// Called when the game starts or when spawned
@@ -54,26 +58,27 @@ public:
 	//Nombre minim de sales - dessincronitzat
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Generator Values")
 	int minRooms;
-
+	
+	
 	//Mida del mapa - dessincronitzat
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Generator Values")
 	int midaMapa;
-
-	/* Base Room -> serà un array amb totes els diferents*/
+/*
+	 Base Room -> serà un array amb totes els diferents
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rooms")
 	TSubclassOf<class AMyBP> BaseRoom;
 
-	/* Room Inicial*/
+	// Room Inicial
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rooms")
 	TSubclassOf<class AMyBP> StartRoom;
 
-	/* Room Final*/
+	// Room Final
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rooms")
 	TSubclassOf<class AMyBP> EndRoom;
 
-	/* Room Loot*/
+	// Room Loot
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rooms")
-	TSubclassOf<class AMyBP> LootRoom;
+	TSubclassOf<class AMyBP> LootRoom;*/
 
 	/* Totes les sales normals*/
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rooms")
@@ -101,6 +106,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GenerateRooms")
 	virtual void setRoomsID();
 
+	/*
 	//Generacio de sales especials
 	UFUNCTION(BlueprintCallable, Category = "GenerateRooms")
 	virtual void setSpecialRooms();
@@ -108,7 +114,7 @@ public:
 	//Bucle que s'encarrega de cridar a spawnRoom			//No fer-ho aixi
 	UFUNCTION(BlueprintCallable, Category = "GenerateRooms")
 	virtual void placeLevel();	
-
+	*/
 
 	//Ens dona el numero de portes segons la X i la Y del mapa logic
 	UFUNCTION(BlueprintCallable, Category = "GenerateRooms")

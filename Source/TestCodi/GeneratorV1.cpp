@@ -3,6 +3,8 @@
 
 #include "GeneratorV1.h"
 
+#include <algorithm>
+#include <random>
 // Sets default values
 AGeneratorV1::AGeneratorV1() {
 
@@ -38,11 +40,20 @@ AGeneratorV1::AGeneratorV1() {
 			_mapaLogic[a][b] = 0;
 		}
 	}
-	myWorld = GetWorld();
-	referenciesOk = false;
-	maxRooms = 22;
-	minRooms = 17;
+	//myWorld = GetWorld();
 	midaMapa = MidaMapa;
+
+	StartRoom = false;
+	LootRoom = false;
+	BossRoom = false;
+
+
+	for (int i = 3; i <= 22; i++) {
+		idSales.push_back(i);
+	}
+
+	std::shuffle(idSales.begin(), idSales.end(), std::random_device());
+
 	//spawnRoom(0, FVector2D{ 0,0 });
 }
 
@@ -86,6 +97,7 @@ void AGeneratorV1::clearData() {
 	_numCasellesFetes = 1;
 	_valorAleatori = 0;
 
+	midaMapa = MidaMapa;
 
 	for (int a = 0; a < MidaMapa; a++) {
 		for (int b = 0; b < MidaMapa; b++) {
@@ -101,11 +113,13 @@ void AGeneratorV1::clearData() {
 			_mapaLogic[a][b] = 0;
 		}
 	}
-	myWorld = GetWorld();
-	referenciesOk = false;
-	maxRooms = 22;
-	minRooms = 17;
-	midaMapa = MidaMapa;
+	//myWorld = GetWorld();
+
+	for (int i = 3; i <= 22; i++) {
+		idSales.push_back(i);
+	}
+
+	std::shuffle(idSales.begin(), idSales.end(), std::random_device());
 
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("2.Variables netes")));
 }
@@ -121,9 +135,16 @@ void AGeneratorV1::generateLevel()	//Generació de mapa logic i creació de mapa r
 
 	_posActual = _posInicial;
 	_infoCasella[_posActual.posX][_posActual.posY].hemEstat = true;	
-	
-	int nRooms = minRooms + rand() % (maxRooms + 1);
-	while (_numCasellesFetes < 15) {
+	_infoCasella[_posActual.posX][_posActual.posY].id = 0;
+
+	StartRoom = true;
+
+
+	int numSales = rand() % 16;
+	if (numSales < 10) { numSales = 10; }
+
+
+	while (_numCasellesFetes < numSales) {
 		_valorAleatori = rand() % 4 + 1;
 
 		switch (_valorAleatori) {
@@ -276,22 +297,47 @@ void AGeneratorV1::generateLevel()	//Generació de mapa logic i creació de mapa r
 		}
 	}
 
+
+	if (!BossRoom) {
+		BossRoom = true;
+		_infoCasella[_posActual.posX][_posActual.posY].id = 1;
+	}
+
+
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("3.Mapa logic creat")));
 }
 
 void AGeneratorV1::setRoomsID()
 {
-	
+
+	bool lootDone = false;
+	while (!lootDone) { // 1 2 i 3
+		int x = rand() % MidaMapa;
+		int y = rand() % MidaMapa;
+
+		if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0) {
+			_infoCasella[x][y].id = 2;
+			lootDone = true;
+
+
+		}
+	}
+
 	for (int x = 0; x < MidaMapa; x++) {
 		for (int y = 0; y < MidaMapa; y++) {
 			if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0) {
-				_infoCasella[x][y].id = rand() % 18 + 3; //Del 3 al 12
+				//_infoCasella[x][y].id = rand() % 18 + 3; //Del 3 al 12
+				_infoCasella[x][y].id = idSales.back();
+				idSales.pop_back();
 			}
 		}
-	}	
+	}
+
+
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("4.Room ID's fetes~~~~")));
 }
 
+/*
 void AGeneratorV1::setSpecialRooms() {
 	//Aquesta funcio genera les sales especials, Inici, Loot, Boss
 	//I les col·loca en sales buides (sense portes)
@@ -409,13 +455,13 @@ void AGeneratorV1::spawnRoom(int roomNum, int doorNum, FVector2D vectorPos) {
 
 	FVector spawnLocation = FVector{ vectorPos.X, vectorPos.Y, 0 };
 	//FVector spawnLocation = FVector{ 1000, 0, 0 };	// per provar que funcioni correctament
-	/*
-		0 = Inici
-		1 = Final
-		2 = Loot
-		3 ~ 12 = Sala Normal
+	
+		//0 = Inici
+		//1 = Final
+		//2 = Loot
+		//3 ~ 12 = Sala Normal
 
-	*/
+	
 	switch (roomNum) {
 	case 0:
 		newRoom = myWorld->SpawnActor<AMyBP>(StartRoom, spawnLocation, spawnRotation, spawnParams);
@@ -497,6 +543,7 @@ void AGeneratorV1::spawnRoom(int roomNum, int doorNum, FVector2D vectorPos) {
 
 
 }
+*/
 
 int AGeneratorV1::getNumDoors(int x, int y) {
 	int num = -1;
