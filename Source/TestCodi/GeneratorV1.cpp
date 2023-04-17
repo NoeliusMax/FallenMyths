@@ -315,7 +315,7 @@ void AGeneratorV1::setRoomsID()
 		int x = rand() % MidaMapa;
 		int y = rand() % MidaMapa;
 
-		if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0) {
+		if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0 && _mapaLogic[x][y] != 1) {
 			_infoCasella[x][y].id = 2;
 			lootDone = true;
 
@@ -325,7 +325,7 @@ void AGeneratorV1::setRoomsID()
 
 	for (int x = 0; x < MidaMapa; x++) {
 		for (int y = 0; y < MidaMapa; y++) {
-			if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0) {
+			if (_infoCasella[x][y].id == -1 && _mapaLogic[x][y] != 0 && _mapaLogic[x][y] != 1 && _mapaLogic[x][y] != 2) {
 				//_infoCasella[x][y].id = rand() % 18 + 3; //Del 3 al 12
 				_infoCasella[x][y].id = idSales.back();
 				idSales.pop_back();
